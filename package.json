@@ -1,0 +1,35 @@
+{
+   "name": "hapi_postgre_back",
+   "version": "1.0.0",
+   "description": "",
+   "main": "index.js",
+   "scripts": {
+      "build": "npx tsc --build",
+      "start": "ts-node src/server.ts",
+      "typeorm": "typeorm-ts-node-commonjs"
+   },
+   "keywords": [],
+   "author": "",
+   "license": "ISC",
+   "devDependencies": {
+      "@types/hapi__hapi": "^21.0.0",
+      "@types/hapi__inert": "^5.2.6",
+      "@types/hapi__joi": "^17.1.9",
+      "@types/hapi__vision": "^5.5.4",
+      "@types/joi": "^17.2.3",
+      "@types/node": "^16.18.19",
+      "hapi-swagger": "^16.0.1",
+      "ts-node": "^10.7.0",
+      "typescript": "4.5.2"
+   },
+   "dependencies": {
+      "@hapi/boom": "^10.0.1",
+      "@hapi/hapi": "^21.3.0",
+      "@hapi/inert": "^7.1.0",
+      "@hapi/vision": "^7.0.1",
+      "filepaths": "^0.3.0",
+      "pg": "^8.4.0",
+      "reflect-metadata": "^0.1.13",
+      "typeorm": "0.3.12"
+   }
+}

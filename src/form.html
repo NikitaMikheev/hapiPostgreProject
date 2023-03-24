@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="form.css">
+</head>
+<body>
+    <div class="postForm">
+        <h1>Внести данные о пользователе через форму</h1>
+        <form action="/post" method="post">
+        <input type="text" placeholder="Введите имя" name="userName">
+        <input type="text" placeholder="Введите фамилию" name="userLastName">
+        <input type="text" placeholder="Введите e-mail" name="userEmail">
+        <input type="password" placeholder="Введите пароль" name="userPass">
+        <input type="number" placeholder="Введите возраст" name="userAge">
+        <button type="submit" name="action" value="add">Добавить</button>
+        </form>
+    </div>
+
+    <div class="getForm">
+        <h1>Получить данные по id пользователя</h1>
+        <form action="/get">
+            <input type="number" method="get" name="id" placeholder="Введите ID пользователя">
+            <button type="submit">Получить информацию о пользователе</button>
+        </form>
+    </div>
+
+
+    <style type="text/css">
+        .postForm {
+            margin-bottom: 60px;
+        };
+
+        .getForm {
+            margin-bottom: 60px;
+        }
+    </style>
+
+</body>
+</html>
