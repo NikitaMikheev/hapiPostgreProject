@@ -8,10 +8,12 @@ export = ({
         notes: 'Удаляет пользователя',
         tags: ['api']
     },
-    handler: function (request, h) { // удаляем пользователя по запросу (например, через Insomnia), в качестве параметров (через /) передаем id
+    handler: async function (request, h) { // удаляем пользователя по запросу (например, через Insomnia), в качестве параметров (через /) передаем id
         try {
             const ID = request.params.id;
-            functionDel(ID);
+            if(await functionDel(ID)) {
+                return 'Такого пользователя не существует!';
+            }
             console.log("Пользователь удален!");
             return h.file('form.html');
         }
