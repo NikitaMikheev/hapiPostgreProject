@@ -1,5 +1,6 @@
-import { AppDataSource } from "../../data-source"
-import { User } from "../../entity/User"
+import { AppDataSource } from "../../data-source";
+import { User } from "../../entity/User";
+import * as Crypto from 'crypto';
 
 export const functionPut = async (ID, params) => {
     const userRep = AppDataSource.getRepository(User)
@@ -11,8 +12,16 @@ export const functionPut = async (ID, params) => {
     let count = 1;
     for(let item in params) {
 
+        if(count==4) {
+            const salt = Crypto.randomBytes(16).toString('hex'); // генерируем соль
+            const hash = Crypto.pbkdf2Sync(params[item], salt, 1000, 64, 'sha512').toString('hex'); // хешируем пароль
+            userPut[userPutArr[count]] = hash;
+        }
+
+        else {
+            userPut[userPutArr[count]] = params[item]; 
+        }
         
-        userPut[userPutArr[count]] = params[item] // доделать
         count++;
 
         if(count>=userPutArr.length) {
