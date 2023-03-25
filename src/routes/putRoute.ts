@@ -9,11 +9,13 @@ export = ({
         notes: 'Изменяет пользователя',
         tags: ['api']
     },
-    handler: function (request, h) {
+    handler: async function (request, h) {
         try {
             const ID = request.params.id;
 
-            functionPut(ID, request.query);
+            if(await functionPut(ID, request.query)) {
+                return 'Такого пользователя не существует!';
+            }
             return 'Изменения сохранены!';
         }
         catch(error) {
