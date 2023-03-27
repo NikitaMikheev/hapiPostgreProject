@@ -1,4 +1,10 @@
 import { functionPut } from "./routesMethod/functionPut";
+import Joi from "joi";
+
+const resp = Joi.object({
+    id: Joi.number(),
+}).label('Пользователь изменен: ');
+
 
 
 export = ({
@@ -7,7 +13,21 @@ export = ({
     options: {
         description: 'Put запрос',
         notes: 'Изменяет пользователя',
-        tags: ['api']
+        tags: ['api'],
+        validate: {
+            params: Joi.object({
+                id: Joi.number().description('ID пользователя')
+            }),
+            query: Joi.object({
+                userName: Joi.string().description('Имя пользователя'),
+                userLastName: Joi.string().description('Фамилия пользователя'),
+                userEmail: Joi.string().description('E-mail пользователя'),
+                userPass: Joi.string().description('Пароль пользователя'),
+                userAge: Joi.number().description('Возраст пользователя')
+            }),
+        },
+
+        response: {schema: resp}
     },
     handler: async function (request, h) {
         try {

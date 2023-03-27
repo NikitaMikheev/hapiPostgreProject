@@ -1,5 +1,12 @@
-import { myUser, PHost } from "../types/type";
+import Joi from "joi";
 import { functionGet } from "./routesMethod/functionGet";
+
+const resp = Joi.object({
+    Name: Joi.string(),
+    Surname: Joi.string(),
+    Email: Joi.string(),
+    Age: Joi.number()
+}).label('Запрошенный пользователь: ');
 
 export = ({ // Ищет по ID. Можно переделать под поиск любого поля
     method: 'GET',
@@ -7,7 +14,14 @@ export = ({ // Ищет по ID. Можно переделать под поис
     options: {
         description: 'Get запрос',
         notes: 'Запрос пользователя по ID',
-        tags: ['api']
+        tags: ['api'],
+        validate: {
+            query: Joi.object({
+                id: Joi.number().description('ID пользователя')
+            })
+        },
+
+        response: {schema: resp}
     },
     handler: async function (request, h) {
         try {

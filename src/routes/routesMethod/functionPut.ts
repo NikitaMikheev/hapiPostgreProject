@@ -25,7 +25,7 @@ export const functionPut = async (ID, params) => {
             
             count++;
     
-            if(count>=userPutArr.length) {
+            if(count>userPutArr.length) {
                 console.log('Передано слишком много параметров! Лишние параметры обрезаны.');
                 break;
             }

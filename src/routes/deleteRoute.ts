@@ -1,4 +1,12 @@
 import { functionDel } from "./routesMethod/functionDelete";
+import Joi from "joi";
+
+const resp = Joi.object({
+    id: Joi.number(),
+    Name: Joi.string(),
+    Surname: Joi.string()
+}).label('Пользователь удален: ');
+
 
 export = ({
     method: 'DELETE', 
@@ -6,7 +14,14 @@ export = ({
     options: {
         description: 'Delete запрос',
         notes: 'Удаляет пользователя',
-        tags: ['api']
+        tags: ['api'],
+        validate: {
+            params: Joi.object({
+                id: Joi.number().description('ID пользователя')
+            })
+        },
+
+        response: {schema: resp}
     },
     handler: async function (request, h) { // удаляем пользователя по запросу (например, через Insomnia), в качестве параметров (через /) передаем id
         try {

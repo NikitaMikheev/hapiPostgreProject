@@ -1,10 +1,14 @@
-import * as Hapi from '@hapi/hapi';
-import * as inert from '@hapi/inert';
-import * as Swagger from 'hapi-swagger';
-import * as Vision from '@hapi/vision';
+import Hapi from '@hapi/hapi';
+import inert from '@hapi/inert';
+import Swagger from 'hapi-swagger';
+import Vision from '@hapi/vision';
 import { PHost } from "./types/type";
 import { connectBD } from './connectBD';
-import * as filepaths from 'filepaths';
+import deleteRoute  from './routes/deleteRoute';
+import putRoute from './routes/putRoute';
+import getRoute from './routes/getRoute';
+import postRoute from './routes/postRoute';
+import homePage from './routes/homePage';
 
 
 // ЭТО ТОЧКА ВХОДА
@@ -36,7 +40,7 @@ const start = async () => {
         {
             plugin: Swagger,
             options: swaggerOptions
-        }
+        },
     ]
 
     await server.register(plugins);
@@ -46,9 +50,7 @@ const start = async () => {
 
     connectBD();
 
-    let routes = filepaths.getSync(__dirname + '/routes/', {ignore: 'routesMethod'}); // рекурсивно обходим с помощью утилиты папку с рутами, игонируем папку routesMethod
-    for (let route of routes)
-        server.route(require(route)) // передаем массив рутов. Работает
+    server.route([deleteRoute, putRoute, postRoute, getRoute, homePage]) // передаем массив рутов. Работает
        
 }
 

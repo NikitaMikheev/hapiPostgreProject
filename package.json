@@ -27,7 +27,6 @@
       "@hapi/hapi": "^21.3.0",
       "@hapi/inert": "^7.1.0",
       "@hapi/vision": "^7.0.1",
-      "filepaths": "^0.3.0",
       "pg": "^8.4.0",
       "reflect-metadata": "^0.1.13",
       "typeorm": "0.3.12"
