@@ -1,12 +1,6 @@
 import Joi from "joi";
 import { functionGet } from "./routesMethod/functionGet";
 
-const resp = Joi.object({
-    Name: Joi.string(),
-    Surname: Joi.string(),
-    Email: Joi.string(),
-    Age: Joi.number()
-}).label('Запрошенный пользователь: ');
 
 export = ({ // Ищет по ID. Можно переделать под поиск любого поля
     method: 'GET',
@@ -20,8 +14,6 @@ export = ({ // Ищет по ID. Можно переделать под поис
                 id: Joi.number().description('ID пользователя')
             })
         },
-
-        response: {schema: resp}
     },
     handler: async function (request, h) {
         try {

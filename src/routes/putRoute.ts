@@ -1,11 +1,6 @@
 import { functionPut } from "./routesMethod/functionPut";
 import Joi from "joi";
 
-const resp = Joi.object({
-    id: Joi.number(),
-}).label('Пользователь изменен: ');
-
-
 
 export = ({
     method: 'PUT', 
@@ -26,8 +21,6 @@ export = ({
                 userAge: Joi.number().description('Возраст пользователя')
             }),
         },
-
-        response: {schema: resp}
     },
     handler: async function (request, h) {
         try {

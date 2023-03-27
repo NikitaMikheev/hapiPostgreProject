@@ -2,10 +2,6 @@ import { myUser } from "../types/type";
 import { functionPost } from "./routesMethod/functionPost";
 import Joi from "joi";
 
-const resp = Joi.object({
-    Name: Joi.string(),
-    Surname: Joi.string()
-}).label('Пользователь добавлен: ');
 
 export = ({
     method: 'POST',
@@ -29,7 +25,6 @@ export = ({
             })
         },
         
-        response: {schema: resp}
     },
     handler: function (request, h) { // добавление пользователя через форму 
         try {
