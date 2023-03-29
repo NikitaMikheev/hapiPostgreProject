@@ -16,6 +16,7 @@ export = ({
         auth: 'simple'
     },
     handler: function (request, h) {
-      return 'Добро пожаловать';
+        
+      return `Добро пожаловать, ${request.auth.credentials.name}`;
     }
 });
