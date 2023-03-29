@@ -13,7 +13,7 @@ export const functionPut = async (ID, params) => {
         let count = 2;
         for(let item in params) {
     
-            if(count==4) {
+            if(count==5) {
                 const salt = Crypto.randomBytes(16).toString('hex'); // генерируем соль
                 const hash = Crypto.pbkdf2Sync(params[item], salt, 1000, 64, 'sha512').toString('hex'); // хешируем пароль
                 userPut[userPutArr[count]] = hash;
