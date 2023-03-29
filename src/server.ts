@@ -2,6 +2,7 @@ import Hapi from '@hapi/hapi';
 import inert from '@hapi/inert';
 import Swagger from 'hapi-swagger';
 import Vision from '@hapi/vision';
+import basic from '@hapi/basic';
 import { PHost } from "./types/type";
 import { connectBD } from './connectBD';
 import deleteRoute  from './routes/deleteRoute';
@@ -9,6 +10,8 @@ import putRoute from './routes/putRoute';
 import getRoute from './routes/getRoute';
 import postRoute from './routes/postRoute';
 import homePage from './routes/homePage';
+import authentication from './routes/authentication';
+import { validate } from './routes/routesMethod/functionValidate';
 
 
 // ЭТО ТОЧКА ВХОДА
@@ -34,6 +37,10 @@ const start = async () => {
         },
 
         {
+            plugin: basic
+        },
+
+        {
             plugin: Vision
         },
 
@@ -49,8 +56,9 @@ const start = async () => {
     console.log('Сервер по адресу %s', server.info.uri);
 
     connectBD();
-
-    server.route([deleteRoute, putRoute, postRoute, getRoute, homePage]) // передаем массив рутов. Работает
+    
+    server.auth.strategy('simple', 'basic', {validate});
+    server.route([deleteRoute, putRoute, postRoute, getRoute, homePage, authentication]) // передаем массив рутов. Работает
        
 }
 

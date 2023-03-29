@@ -7,6 +7,9 @@ export class User {
     id: number
 
     @Column()
+    salt: string
+
+    @Column()
     firstName: string
 
     @Column()

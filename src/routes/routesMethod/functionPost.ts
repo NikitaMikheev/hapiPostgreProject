@@ -13,6 +13,7 @@ export const functionPost = async (formObj) => {
     const salt = Crypto.randomBytes(16).toString('hex'); // генерируем соль
     const hash = Crypto.pbkdf2Sync(formObj.userPass, salt, 1000, 64, 'sha512').toString('hex'); // хешируем пароль
     newUser.password = hash; // добавляем хешированный пароль в бд
+    newUser.salt = salt; // сохраняем соль в бд для дальнейшей авторизации
 
 
     newUser.age = formObj.age;
