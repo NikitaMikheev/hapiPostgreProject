@@ -11,6 +11,7 @@ export function connectBD() {
         console.log("Пользователи в базе данных:", users)
 
         const test = await AppDataSource.manager.find(Test)
+        console.log('Тут тестовая база данных: ', test)
 
 
     }).catch(error => console.log(error))
