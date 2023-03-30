@@ -1,17 +1,11 @@
 import Hapi from '@hapi/hapi';
-import inert from '@hapi/inert';
-import Swagger from 'hapi-swagger';
-import Vision from '@hapi/vision';
-import basic from '@hapi/basic';
+import { plugins } from './plugins/plugins';
 import { PHost } from "./types/type";
 import { connectBD } from './connectBD';
-import deleteRoute  from './routes/deleteRoute';
-import putRoute from './routes/putRoute';
-import getRoute from './routes/getRoute';
-import postRoute from './routes/postRoute';
+import { crudRoutes } from './routes/CRUD';
 import homePage from './routes/homePage';
 import authentication from './routes/authentication';
-import { validate } from './routes/routesMethod/functionValidate';
+import { validate } from './model/bdMethod/functionValidate';
 
 
 // ЭТО ТОЧКА ВХОДА
@@ -25,31 +19,6 @@ const portHost:PHost = {
 const start = async () => {
     const server = Hapi.server(portHost);
 
-    const swaggerOptions: Swagger.RegisterOptions = { // настройка сваггера
-        info: {
-            title: 'Тест',
-        }
-    };
-
-    const plugins: Array<Hapi.ServerRegisterPluginObject<any>> = [
-        {
-            plugin: inert
-        },
-
-        {
-            plugin: basic
-        },
-
-        {
-            plugin: Vision
-        },
-
-        {
-            plugin: Swagger,
-            options: swaggerOptions
-        },
-    ]
-
     await server.register(plugins);
 
     await server.start();
@@ -58,7 +27,7 @@ const start = async () => {
     connectBD();
     
     server.auth.strategy('simple', 'basic', {validate});
-    server.route([deleteRoute, putRoute, postRoute, getRoute, homePage, authentication]) // передаем массив рутов. Работает
+    server.route([...crudRoutes, homePage, authentication]) // передаем массив рутов. Работает
        
 }
 

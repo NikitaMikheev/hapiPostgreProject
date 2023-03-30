@@ -1,5 +1,5 @@
 import { AppDataSource } from "./data-source"
-import { User } from "./entity/User"
+import { User } from "./model/entity/User";
 import 'reflect-metadata';
 
 

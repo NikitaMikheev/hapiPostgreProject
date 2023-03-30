@@ -1,4 +1,5 @@
-// Рут, возвращающий главную страницу с формой
+import { handlerHomePage } from "./handlers/homePageHandler";
+
 export = ({ // тест swagger, все работает
     method: 'GET',
     path: '/',
@@ -7,14 +8,5 @@ export = ({ // тест swagger, все работает
         notes: 'Возвращает главную страницу',
         tags: ['api']
     },
-    handler: function (request, h) { // содержимое handler можно вынести отдельно в ассинхронную функцию
-        try {
-            return h.file('form.html');
-        }
-
-        catch(error) {
-            console.log('Ошибка возвращения главной страницы');
-            console.log(error);
-        }
-    }
+    handler: handlerHomePage
 });

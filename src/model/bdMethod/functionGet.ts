@@ -1,5 +1,5 @@
 import { AppDataSource } from "../../data-source"
-import { User } from "../../entity/User"
+import { User } from "../entity/User"
 import { myUser } from "../../types/type";
 
 export const functionGet = async (ID) => { // Ищет по ID. Можно переделать под поиск любого поля
