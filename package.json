@@ -6,7 +6,9 @@
    "scripts": {
       "build": "npx tsc --build",
       "start": "ts-node src/server.ts",
-      "typeorm": "typeorm-ts-node-commonjs"
+      "typeorm": "typeorm-ts-node-commonjs migration:generate ./src/migrations/addTestTable -d ./src/data-source.ts",
+      "add": "typeorm-ts-node-commonjs migration:run -d ./src/data-source.ts",
+      "drop": "typeorm-ts-node-commonjs migration:revert -d ./src/data-source.ts" 
    },
    "keywords": [],
    "author": "",

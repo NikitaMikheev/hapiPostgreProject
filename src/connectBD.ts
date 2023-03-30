@@ -1,5 +1,6 @@
 import { AppDataSource } from "./data-source"
 import { User } from "./model/entity/User";
+import { Test } from "./model/entity/test";
 import 'reflect-metadata';
 
 
@@ -8,6 +9,9 @@ export function connectBD() {
 
         const users = await AppDataSource.manager.find(User)
         console.log("Пользователи в базе данных:", users)
+
+        const test = await AppDataSource.manager.find(Test)
+
 
     }).catch(error => console.log(error))
 }
