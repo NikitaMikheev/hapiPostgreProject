@@ -10,10 +10,10 @@ export const functionPut = async (ID, payload) => {
         })
 
         const userPutArr = Object.keys(userPut);
-        let count = 2;
+        let count = 3;
         for(let item in payload) {
     
-            if(count==5) {
+            if(count==7) {
                 const salt = Crypto.randomBytes(16).toString('hex'); // генерируем соль
                 const hash = Crypto.pbkdf2Sync(payload[item], salt, 1000, 64, 'sha512').toString('hex'); // хешируем пароль
                 userPut[userPutArr[count]] = hash;

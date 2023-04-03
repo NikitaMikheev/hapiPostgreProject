@@ -1,7 +1,7 @@
 import Joi from "joi";
-import { handlerAuthentication } from "./handlers/authenticationHandler";
+import { handlerAuthentication } from "./handlers/authenticationHandler"
 
-export = ({
+export = ({ // Пост запрос передает логин и пароль.
     method: "POST",
     path: "/authentication",
     options: {
@@ -19,7 +19,6 @@ export = ({
                 payloadType: 'form'
             }
         },
-        auth: 'simple'
     },
-    handler: handlerAuthentication
+    handler: handlerAuthentication // После аутентификации возвращает токен на клиент.
 });

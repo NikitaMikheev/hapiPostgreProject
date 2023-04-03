@@ -8,7 +8,7 @@
       "start": "ts-node src/server.ts",
       "typeorm": "typeorm-ts-node-commonjs migration:generate ./src/migrations/addTestTable -d ./src/data-source.ts",
       "add": "typeorm-ts-node-commonjs migration:run -d ./src/data-source.ts",
-      "drop": "typeorm-ts-node-commonjs migration:revert -d ./src/data-source.ts" 
+      "drop": "typeorm-ts-node-commonjs migration:revert -d ./src/data-source.ts"
    },
    "keywords": [],
    "author": "",
@@ -29,7 +29,9 @@
       "@hapi/boom": "^10.0.1",
       "@hapi/hapi": "^21.3.0",
       "@hapi/inert": "^7.1.0",
+      "@hapi/jwt": "^3.2.0",
       "@hapi/vision": "^7.0.1",
+      "jsonwebtoken": "^9.0.0",
       "pg": "^8.4.0",
       "reflect-metadata": "^0.1.13",
       "typeorm": "0.3.12"

@@ -1,6 +1,5 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
-import { Test } from "./model/entity/test"
 import { User } from "./model/entity/User"
 
 export const AppDataSource = new DataSource({
@@ -12,7 +11,7 @@ export const AppDataSource = new DataSource({
     database: "postgres", // база данных - менять
     synchronize: false,
     logging: false,
-    entities: [User, Test],
+    entities: [User],
     migrations: [__dirname + '/migrations/*.ts'],
     subscribers: [],
 })

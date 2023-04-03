@@ -10,6 +10,9 @@ export class User {
     salt: string
 
     @Column()
+    refreshToken: string | null
+
+    @Column()
     firstName: string
 
     @Column()

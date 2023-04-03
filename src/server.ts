@@ -5,7 +5,9 @@ import { connectBD } from './connectBD';
 import { crudRoutes } from './routes/CRUD';
 import homePage from './routes/homePage';
 import authentication from './routes/authentication';
-import { validate } from './model/bdMethod/functionValidate';
+import login from './routes/login';
+import authenticationRefresh from './routes/authenticationRefresh';
+import config from './config';
 
 
 // ЭТО ТОЧКА ВХОДА
@@ -25,9 +27,28 @@ const start = async () => {
     console.log('Сервер по адресу %s', server.info.uri);
 
     connectBD();
-    
-    server.auth.strategy('simple', 'basic', {validate});
-    server.route([...crudRoutes, homePage, authentication]) // передаем массив рутов. Работает
+
+    server.auth.strategy('jwt_token', 'jwt',
+        {keys: config.secret,
+        verify: {
+            aud: 'urn:audience:test',
+            iss: 'urn:issuer:test',
+            sub: false,
+            nbf: true,
+            exp: true,
+            maxAgeSec: 600, // 10 минут жизни
+            timeSkewSec: 15
+        },
+        validate: (artifacts, request, h) => {
+            
+            return {
+                isValid: true,
+                credentials: { user: artifacts.decoded.payload.user }
+            };
+        }
+    });
+            
+    server.route([...crudRoutes, homePage, authentication, login, authenticationRefresh]) // передаем массив рутов. Работает
        
 }
 
