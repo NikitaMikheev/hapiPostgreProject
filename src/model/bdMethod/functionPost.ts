@@ -3,6 +3,10 @@ import { User } from "../entity/User"
 import * as Crypto from 'crypto';
 
 export const functionPost = async (formObj) => {
+
+    if(formObj.userPass!==formObj.userPassConfm) {
+        return false;
+    }
     const newUser = new User();
     console.log(formObj);
 

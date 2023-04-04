@@ -1,6 +1,5 @@
 import { AppDataSource } from "../../data-source"
 import { User } from "../entity/User"
-import { myUser } from "../../types/type";
 
 export const functionGet = async (ID) => { // Ищет по ID. Можно переделать под поиск любого поля
     const userRep = AppDataSource.getRepository(User)
@@ -9,7 +8,7 @@ export const functionGet = async (ID) => { // Ищет по ID. Можно пе�
     })
 
     if(userGet) {
-        const user:myUser = {
+        const user = {
             firstName: userGet.firstName,
             lastName: userGet.lastName,
             userEmail: userGet.email,

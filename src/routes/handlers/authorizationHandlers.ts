@@ -1,5 +1,34 @@
 import { validateRefresh } from "../../model/bdMethod/functionValidateRefresh";
 import { validate } from "../../model/bdMethod/functionValidate";
+import { functionPost } from "../../model/bdMethod/functionPost";
+import { myUser } from "../../types/type";
+
+export const handlerRegister = async (request, h) => { // добавление пользователя через форму 
+    try {
+
+        let formObj:myUser = {
+            firstName: request.payload.userName,
+            lastName: request.payload.userLastName,
+            userEmail: request.payload.userEmail,
+            userPass: request.payload.userPass,
+            userPassConfm: request.payload.userPassConfm,
+            age: parseInt(request.payload.userAge)
+        }
+    
+        const res = await functionPost(formObj);
+
+        if(res===false) {
+            return 'Пароли не совпадают!';
+        }
+
+        return h.file('form.html');
+    }
+
+    catch(error) {
+        console.log('Ошибка POST запроса');
+        console.log(error);
+    }
+}
 
 export const handlerAuthentication = async (request, h) => {
 

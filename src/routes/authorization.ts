@@ -1,8 +1,36 @@
 import Joi from "joi";
+import { handlerRegister } from "./handlers/authorizationHandlers";
 import { handlerAuthentication } from "./handlers/authorizationHandlers";
 import { handlerRefreshAuthentication } from "./handlers/authorizationHandlers";
 
-const authentication = ({ // Рут аутетнтификации. Пост запрос передает логин и пароль. Рут возвращает на клиент два токена - access и refresh 
+const register = ({ // рут для регистрации
+    method: 'POST',
+    path: '/register',
+    options: {
+        description: 'Регистрация пользователя',
+        notes: 'Регистрирует пользователя, добавляет его в бд',
+        tags: ['api'],
+        plugins: {
+            'hapi-swagger': {
+                payloadType: 'form'
+            }
+        },
+        validate: {
+            payload: Joi.object({
+                userName: Joi.string().description('Имя пользователя'),
+                userLastName: Joi.string().description('Фамилия пользователя'),
+                userEmail: Joi.string().description('E-mail пользователя'),
+                userPass: Joi.string().description('Пароль пользователя'),
+                userPassConfm: Joi.string().description('Подтверждение пароля'),
+                userAge: Joi.number().description('Возраст пользователя')
+            })
+        },
+        
+    },
+    handler: handlerRegister
+});
+
+const authentication = ({ // Рут аутентификации. Пост запрос передает логин и пароль. Рут возвращает на клиент два токена - access и refresh 
     method: "POST",
     path: "/authentication",
     options: {
@@ -66,4 +94,4 @@ const authorize = ({ // Рут на авторизацию со стратеги
 });
 
 
-export const authorization = [authentication, authenticationRefresh, authorize];
+export const authorization = [register,authentication, authenticationRefresh, authorize];

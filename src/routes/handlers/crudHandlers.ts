@@ -32,10 +32,15 @@ export const handlerPost = async (request, h) => { // добавление по�
             lastName: request.payload.userLastName,
             userEmail: request.payload.userEmail,
             userPass: request.payload.userPass,
+            userPassConfm: request.payload.userPassConfm,
             age: parseInt(request.payload.userAge)
         }
     
-        functionPost(formObj);
+        const res = await functionPost(formObj);
+
+        if(res===false) {
+            return 'Пароли не совпадают!';
+        }
 
         return h.file('form.html');
     }
