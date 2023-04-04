@@ -32,6 +32,7 @@ export const validateRefresh = async (token) => {
         const refreshToken = jwt.sign({ 
             aud: 'urn:audience:test',
             iss: 'urn:issuer:test',
+            id: user.id,
             sub: false,
             timeSkewSec: 15
         }, 'secretRefresh', { expiresIn: '60d' }); // рефреш токен живет 60 дней
@@ -44,5 +45,9 @@ export const validateRefresh = async (token) => {
         }           
     }
 
-    return { isValid: false, credentials: {id: user.id, name: user.firstName}  };
+    else {
+        return { isValid: false, credentials: {id: user.id, name: user.firstName}  };
+    }
+
+    
 }
