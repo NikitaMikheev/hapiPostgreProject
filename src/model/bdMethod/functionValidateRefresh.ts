@@ -4,7 +4,12 @@ import jwt from 'jsonwebtoken';
 import config from "../../config";
 
 export const validateRefresh = async (token) => {
-    const decodedData = jwt.verify(token,config.refresh);
+    const decodedData = jwt.verify(token,config.refresh); // декодируем токен, подставляя в него ключ
+
+    if(!decodedData) { // если рефреш токен просрочен, тогда вернёт false. Потребуется заново авторизироваться 
+        return {isValid: false}
+    }
+
     const users = AppDataSource.getRepository(User)
 
     const user = await users.findOneBy({
