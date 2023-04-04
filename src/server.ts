@@ -4,9 +4,7 @@ import { PHost } from "./types/type";
 import { connectBD } from './connectBD';
 import { crudRoutes } from './routes/CRUD';
 import homePage from './routes/homePage';
-import authentication from './routes/authentication';
-import login from './routes/login';
-import authenticationRefresh from './routes/authenticationRefresh';
+import { authorization } from './routes/authorization';
 import config from './config';
 
 
@@ -48,7 +46,7 @@ const start = async () => {
         }
     });
             
-    server.route([...crudRoutes, homePage, authentication, login, authenticationRefresh]) // передаем массив рутов. Работает
+    server.route([...crudRoutes, ...authorization, homePage]) // передаем массив рутов. Работает
        
 }
 
