@@ -5,6 +5,7 @@ import { connectBD } from './connectBD';
 import { crudRoutes } from './routes/CRUD';
 import homePage from './routes/homePage';
 import { authorization } from './routes/authorization';
+import { logout } from './routes/logout';
 import config from './config';
 
 
@@ -46,7 +47,7 @@ const start = async () => {
         }
     });
             
-    server.route([...crudRoutes, ...authorization, homePage]) // передаем массив рутов. Работает
+    server.route([...crudRoutes, ...authorization, homePage, logout]) // передаем массив рутов. Работает
        
 }
 

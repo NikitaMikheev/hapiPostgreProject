@@ -1,5 +1,6 @@
 import { validateRefresh } from "../../model/service/tokenServiceValidateRefresh";
 import { validate } from "../../model/service/tokenServiceValidate";
+import { tokenDelete } from "../../model/service/tokenServiceDelete";
 import { functionPost } from "../../model/service/userServicePost";
 import { myUser } from "../../types/type";
 
@@ -42,4 +43,10 @@ export const handlerRefreshAuthentication = async (request, h) => {
     const token = await validateRefresh(request.payload.token);
     
     return token; // на клиент возвращается обновленный refrhesh и access токены. 
+}
+
+export const handlerLogout = async (request, h) => {
+    await tokenDelete(request.payload.token);
+
+    return "Logout";
 }
