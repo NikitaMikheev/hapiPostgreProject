@@ -3,9 +3,17 @@ import { User } from "../entity/User"
 import * as Crypto from 'crypto';
 
 export const functionPost = async (formObj) => {
+    const users = AppDataSource.getRepository(User)
+    const user = await users.findOneBy({
+        email: formObj.userEmail
+    })
+
+    if(user) {
+        return false; // пользователь с таким email уже зарегистрирован
+    }
 
     if(formObj.userPass!==formObj.userPassConfm) {
-        return false;
+        return false; // пароли не совпадают
     }
     const newUser = new User();
     console.log(formObj);
@@ -24,6 +32,6 @@ export const functionPost = async (formObj) => {
     await AppDataSource.manager.save(newUser);
     console.log('Пользователь сохранен!');
 
-    const users = await AppDataSource.manager.find(User)
-    console.log("Пользователи в базе данных: ", users)
+    const usersAll = await AppDataSource.manager.find(User)
+    console.log("Пользователи в базе данных: ", usersAll)
 }
