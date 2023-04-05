@@ -1,4 +1,4 @@
-import { handlerHomePage } from "./handlers/homePageHandler";
+import { handlerHomePage } from "./controllers/homePageController";
 
 export = ({ // тест swagger, все работает
     method: 'GET',

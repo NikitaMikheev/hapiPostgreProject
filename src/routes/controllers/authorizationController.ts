@@ -1,6 +1,6 @@
-import { validateRefresh } from "../../model/bdMethod/functionValidateRefresh";
-import { validate } from "../../model/bdMethod/functionValidate";
-import { functionPost } from "../../model/bdMethod/functionPost";
+import { validateRefresh } from "../../model/service/tokenServiceValidateRefresh";
+import { validate } from "../../model/service/tokenServiceValidate";
+import { functionPost } from "../../model/service/userServicePost";
 import { myUser } from "../../types/type";
 
 export const handlerRegister = async (request, h) => { // добавление пользователя через форму 

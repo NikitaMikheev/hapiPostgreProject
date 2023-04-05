@@ -1,8 +1,8 @@
 import Joi from "joi";
-import { handlerGet } from "./handlers/crudHandlers";
-import { handlerPost } from "./handlers/crudHandlers";
-import { handlerPut } from "./handlers/crudHandlers";
-import { handlerDel } from "./handlers/crudHandlers";
+import { handlerGet } from "./controllers/userController";
+import { handlerPost } from "./controllers/userController";
+import { handlerPut } from "./controllers/userController";
+import { handlerDel } from "./controllers/userController";
 
 
 const get = ({ // Ищет по ID. Можно переделать под поиск любого поля

@@ -1,7 +1,7 @@
-import { functionGet } from "../../model/bdMethod/functionGet";
-import { functionPost } from "../../model/bdMethod/functionPost";
-import { functionPut } from "../../model/bdMethod/functionPut";
-import { functionDel } from "../../model/bdMethod/functionDelete";
+import { functionGet } from "../../model/service/userServiceGet";
+import { functionPost } from "../../model/service/userServicePost";
+import { functionPut } from "../../model/service/userServicePut";
+import { functionDel } from "../../model/service/userServiceDelete";
 import { myUser } from "../../types/type";
 
 export const handlerGet = async (request, h) => {

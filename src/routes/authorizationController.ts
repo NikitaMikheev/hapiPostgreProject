@@ -1,7 +1,7 @@
 import Joi from "joi";
-import { handlerRegister } from "./handlers/authorizationHandlers";
-import { handlerAuthentication } from "./handlers/authorizationHandlers";
-import { handlerRefreshAuthentication } from "./handlers/authorizationHandlers";
+import { handlerRegister } from "./controllers/authorizationController";
+import { handlerAuthentication } from "./controllers/authorizationController";
+import { handlerRefreshAuthentication } from "./controllers/authorizationController";
 
 const register = ({ // рут для регистрации
     method: 'POST',
