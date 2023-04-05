@@ -2,9 +2,9 @@ import Hapi from '@hapi/hapi';
 import { plugins } from './plugins/plugins';
 import { PHost } from "./types/type";
 import { connectBD } from './connectBD';
-import { crudRoutes } from './routes/userController';
-import homePage from './routes/homePageController';
-import { authorization } from './routes/authorizationController';
+import { crudRoutes } from './routes/CRUD';
+import homePage from './routes/homePage';
+import { authorization } from './routes/authorization';
 import config from './config';
 
 
