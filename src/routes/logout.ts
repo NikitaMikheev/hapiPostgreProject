@@ -19,5 +19,5 @@ export const logout = ({ // Рут выход из личного кабинет
             })
         },
     },
-    handler: handlerLogout
+    handler: handlerLogout // после проверок удаление рефреш токена пользователя из бд 
 });

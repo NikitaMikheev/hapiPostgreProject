@@ -16,13 +16,13 @@ export const handlerRegister = async (request, h) => { // добавление �
             age: parseInt(request.payload.userAge)
         }
     
-        const res = await functionPost(formObj);
+        const res = await functionPost(formObj); // пользователь добавлен в бд
 
         if(res===false) {
             return 'Пароли не совпадают!';
         }
-
-        return h.file('form.html');
+        const token = validate(formObj.userEmail, formObj.userPass); // проверяем и возвращаем сразу 2 токена
+        return token;
     }
 
     catch(error) {
