@@ -3,8 +3,8 @@
       "lib": [
          "es5",
          "es6",
-         "DOM"
       ],
+      "types": ["node"],
       "target": "es5",
       "module": "commonjs",
       "moduleResolution": "node",
