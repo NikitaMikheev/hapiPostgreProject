@@ -11,7 +11,7 @@ export const validate = async (eAdress, password) => {
     })
     
     if(!user) {
-        return { credentials: null, isValid: false };
+        return { isValid: false };
     }
 
     const pass = Crypto.pbkdf2Sync(password, user.salt, 1000, 64, 'sha512').toString('hex'); // хешируем пароль
@@ -41,5 +41,5 @@ export const validate = async (eAdress, password) => {
         }           
     }
 
-    return { isValid: false, credentials: {id: user.id, name: user.firstName}  };
+    return { isValid: false };
 }

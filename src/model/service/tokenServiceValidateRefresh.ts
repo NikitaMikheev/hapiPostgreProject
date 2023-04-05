@@ -17,7 +17,7 @@ export const validateRefresh = async (token) => {
     })
     
     if(!user) {
-        return { credentials: null, isValid: false };
+        return { isValid: false };
     }
     
     if(token===user.refreshToken) {
@@ -46,7 +46,7 @@ export const validateRefresh = async (token) => {
     }
 
     else {
-        return { isValid: false, credentials: {id: user.id, name: user.firstName}  };
+        return { isValid: false };
     }
 
     

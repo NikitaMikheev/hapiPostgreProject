@@ -11,3 +11,8 @@ export interface myUser {
     userPassConfm: string,
     age: number
 }
+
+export interface Tokens {
+    accessToken?: string,
+    refreshToken?: string,
+}

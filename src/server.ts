@@ -26,6 +26,14 @@ const start = async () => {
     console.log('Сервер по адресу %s', server.info.uri);
 
     connectBD();
+    server.state('refreshToken', {
+        ttl: 60*24*60*60*100, // 60 дней жизни куки
+        isSecure: true,
+        isHttpOnly: true,
+        encoding: 'base64json',
+        clearInvalid: true,
+        strictHeader: true
+    })
 
     server.auth.strategy('jwt_token', 'jwt',
         {keys: config.secret,
