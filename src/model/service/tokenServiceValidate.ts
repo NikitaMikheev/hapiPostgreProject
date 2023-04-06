@@ -20,6 +20,7 @@ export const validate = async (eAdress, password) => {
         const accessToken = jwt.sign({ 
             aud: 'urn:audience:test',
             iss: 'urn:issuer:test',
+            id: user.id,
             sub: false,
             maxAgeSec: 600, // 10 минут жизни токена
             timeSkewSec: 15

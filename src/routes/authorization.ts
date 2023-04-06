@@ -2,6 +2,8 @@ import Joi from "joi";
 import { handlerRegister } from "./controllers/authorizationController";
 import { handlerAuthentication } from "./controllers/authorizationController";
 import { handlerRefreshAuthentication } from "./controllers/authorizationController";
+import { AppDataSource } from "../data-source";
+import { User } from "../model/entity/User";
 
 const register = ({ // рут для регистрации
     method: 'POST',
@@ -85,9 +87,18 @@ const authorize = ({ // Рут на авторизацию со стратеги
         tags: ['api'],
         auth: 'jwt_token',
     },
-    handler: (artifacts,request, h) => {
+    handler: async (artifacts,request, h) => {
+        const users = AppDataSource.getRepository(User)
+        const user = await users.findOneBy({
+            id: artifacts.auth.artifacts.decoded.payload.id
+        })
+        if(user.refreshToken===null) { // проверяем есть ли у пользователя рефреш токен (если нет, то он разлогинен)
+            return {
+                isValid: false
+            }
+        }
+        
         return {
-            
             isValid: true,
         };
     }
