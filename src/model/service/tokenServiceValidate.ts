@@ -3,21 +3,22 @@ import { User } from "../entity/User"
 import * as Crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 import config from "../../config";
+import { Tokens } from "../../types/type";
 
-export const validate = async (eAdress, password) => {
+export const validate = async (eAdress, password): Promise<false | Tokens> => {
     const users = AppDataSource.getRepository(User)
     const user = await users.findOneBy({
         email: eAdress
     })
     
     if(!user) {
-        return { isValid: false };
+        return false;
     }
 
     const pass = Crypto.pbkdf2Sync(password, user.salt, 1000, 64, 'sha512').toString('hex'); // хешируем пароль
     
     if(pass===user.password) {
-        const accessToken = jwt.sign({ 
+        const accessToken:string = jwt.sign({ 
             aud: 'urn:audience:test',
             iss: 'urn:issuer:test',
             id: user.id,
@@ -26,7 +27,7 @@ export const validate = async (eAdress, password) => {
             timeSkewSec: 15
         }, config.secret); 
 
-        const refreshToken = jwt.sign({ 
+        const refreshToken:string = jwt.sign({ 
             aud: 'urn:audience:test',
             iss: 'urn:issuer:test',
             id: user.id,
@@ -42,5 +43,5 @@ export const validate = async (eAdress, password) => {
         }           
     }
 
-    return { isValid: false };
+    return false;
 }

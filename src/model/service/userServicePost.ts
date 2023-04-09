@@ -1,8 +1,9 @@
 import { AppDataSource } from "../../data-source"
 import { User } from "../entity/User"
 import * as Crypto from 'crypto';
+import { myUser } from "../../types/type";
 
-export const functionPost = async (formObj) => {
+export const functionPost = async (formObj:myUser):Promise<boolean> => {
     const users = AppDataSource.getRepository(User)
     const user = await users.findOneBy({
         email: formObj.userEmail

@@ -1,4 +1,5 @@
 import Hapi from '@hapi/hapi';
+import { Server } from '@hapi/hapi';
 import { plugins } from './plugins/plugins';
 import { PHost } from "./types/type";
 import { connectBD } from './connectBD';
@@ -19,7 +20,7 @@ const portHost:PHost = {
 }
 
 const start = async () => {
-    const server = Hapi.server(portHost);
+    const server:Server = Hapi.server(portHost);
 
     await server.register(plugins);
 

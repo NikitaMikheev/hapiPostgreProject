@@ -2,12 +2,13 @@ import { AppDataSource } from "../../data-source";
 import { User } from "../entity/User"
 import jwt from 'jsonwebtoken';
 import config from "../../config";
+import { Tokens } from "../../types/type";
 
-export const validateRefresh = async (token) => {
+export const validateRefresh = async (token): Promise<false | Tokens>  => {
     const decodedData = jwt.verify(token,config.refresh); // декодируем токен, подставляя в него ключ
 
     if(!decodedData) { // если рефреш токен просрочен, тогда вернёт false. Потребуется заново авторизироваться 
-        return {isValid: false}
+        return false;
     }
 
     const users = AppDataSource.getRepository(User)
@@ -17,7 +18,7 @@ export const validateRefresh = async (token) => {
     })
     
     if(!user) {
-        return { isValid: false };
+        return false ;
     }
     
     if(token===user.refreshToken) {
@@ -47,7 +48,7 @@ export const validateRefresh = async (token) => {
     }
 
     else {
-        return { isValid: false };
+        return false;
     }
 
     

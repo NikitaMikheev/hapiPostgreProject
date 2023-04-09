@@ -4,8 +4,9 @@ import { handlerAuthentication } from "./controllers/authorizationController";
 import { handlerRefreshAuthentication } from "./controllers/authorizationController";
 import { AppDataSource } from "../data-source";
 import { User } from "../model/entity/User";
+import { ServerRoute, ReqRefDefaults, ServerAuth } from "@hapi/hapi";
 
-const register = ({ // рут для регистрации
+const register:ServerRoute<ReqRefDefaults> = ({ // рут для регистрации
     method: 'POST',
     path: '/register',
     options: {
@@ -32,7 +33,7 @@ const register = ({ // рут для регистрации
     handler: handlerRegister
 });
 
-const authentication = ({ // Рут аутентификации. Пост запрос передает логин и пароль. Рут возвращает на клиент два токена - access и refresh 
+const authentication:ServerRoute<ReqRefDefaults> = ({ // Рут аутентификации. Пост запрос передает логин и пароль. Рут возвращает на клиент два токена - access и refresh 
     method: "POST",
     path: "/authentication",
     options: {
@@ -55,7 +56,7 @@ const authentication = ({ // Рут аутентификации. Пост за�
 });
 
 
-const authenticationRefresh = ({ // Рут на обновление refresh токена после протухания токена access. Пост запрос передает рефреш токен, в теле которого вшит id пользователя
+const authenticationRefresh:ServerRoute<ReqRefDefaults> = ({ // Рут на обновление refresh токена после протухания токена access. Пост запрос передает рефреш токен, в теле которого вшит id пользователя
     method: "POST",
     path: "/authentication/refresh",
     options: {
@@ -78,7 +79,7 @@ const authenticationRefresh = ({ // Рут на обновление refresh т�
 });
 
 
-const authorize = ({ // Рут на авторизацию со стратегией 'jwt_token'. Принимает с клиента access токен. Если токен валидируется - авторизирован.
+const authorize = ({ // Рут на авторизацию со стратегией 'jwt_token'. Принимает с клиента access токен. Если токен валидируется - авторизирован. (При типе ServerRoute<ReqRefDefaults> ругается на payload)
     method: "POST",
     path: "/login",
     options: {
@@ -89,6 +90,7 @@ const authorize = ({ // Рут на авторизацию со стратеги
     },
     handler: async (artifacts,request, h) => {
         const users = AppDataSource.getRepository(User)
+    
         const user = await users.findOneBy({
             id: artifacts.auth.artifacts.decoded.payload.id
         })
@@ -105,4 +107,4 @@ const authorize = ({ // Рут на авторизацию со стратеги
 });
 
 
-export const authorization = [register,authentication, authenticationRefresh, authorize];
+export const authorization: ServerRoute<ReqRefDefaults>[] = [register,authentication, authenticationRefresh, authorize];

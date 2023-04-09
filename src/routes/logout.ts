@@ -1,7 +1,8 @@
 import Joi from "joi";
+import { ServerRoute, ReqRefDefaults } from "@hapi/hapi";
 import { handlerLogout } from "./controllers/authorizationController";
 
-export const logout = ({ // Рут выход из личного кабинета
+export const logout:ServerRoute<ReqRefDefaults> = ({ // Рут выход из личного кабинета
     method: "POST",
     path: "/logout",
     options: {

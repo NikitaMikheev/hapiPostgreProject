@@ -13,6 +13,6 @@ export interface myUser {
 }
 
 export interface Tokens {
-    accessToken?: string,
-    refreshToken?: string,
+    accessToken: string,
+    refreshToken: string,
 }

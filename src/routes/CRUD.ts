@@ -1,3 +1,4 @@
+import { ReqRefDefaults, ServerRoute } from "@hapi/hapi";
 import Joi from "joi";
 import { handlerGet } from "./controllers/userController";
 import { handlerPost } from "./controllers/userController";
@@ -5,7 +6,7 @@ import { handlerPut } from "./controllers/userController";
 import { handlerDel } from "./controllers/userController";
 
 
-const get = ({ // Ищет по ID. Можно переделать под поиск любого поля
+const get:ServerRoute<ReqRefDefaults> = ({ // Ищет по ID. Можно переделать под поиск любого поля
     method: 'GET',
     path: '/get',
     options: {
@@ -22,7 +23,7 @@ const get = ({ // Ищет по ID. Можно переделать под по�
 });
 
 
-const post = ({ // рут для регистрации
+const post:ServerRoute<ReqRefDefaults> = ({ // рут для регистрации
     method: 'POST',
     path: '/post',
     options: {
@@ -48,7 +49,7 @@ const post = ({ // рут для регистрации
     handler: handlerPost
 });
 
-const put = ({
+const put:ServerRoute<ReqRefDefaults> = ({
     method: 'PUT', 
     path: `/put/{id}`, // изменяем пользователя по запросу (например, через Insomnia), в качестве параметров - id, для определения пользователя. Через квери параметры передаем изменения в порядке: имя, фамилия, почта, пароль, возраст
     options: {
@@ -76,7 +77,7 @@ const put = ({
     handler: handlerPut
 });
 
-const del = ({
+const del:ServerRoute<ReqRefDefaults> = ({
     method: 'DELETE', 
     path: `/delete/{id}`,
     options: {
@@ -93,4 +94,4 @@ const del = ({
     handler: handlerDel
 })
 
-export const crudRoutes = [get,post,put,del];
+export const crudRoutes: ServerRoute<ReqRefDefaults>[] = [get,post,put,del];
