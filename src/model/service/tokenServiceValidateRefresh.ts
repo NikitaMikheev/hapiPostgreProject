@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import config from "../../config";
 import { Tokens } from "../../types/type";
 
-export const validateRefresh = async (token): Promise<false | Tokens>  => {
+export const validateRefresh = async (token:string): Promise<false | Tokens>  => {
     const decodedData = jwt.verify(token,config.refresh); // декодируем токен, подставляя в него ключ
 
     if(!decodedData) { // если рефреш токен просрочен, тогда вернёт false. Потребуется заново авторизироваться 

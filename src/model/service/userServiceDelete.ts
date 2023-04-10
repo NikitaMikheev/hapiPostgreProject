@@ -1,7 +1,7 @@
 import { AppDataSource } from "../../data-source"
 import { User } from "../entity/User"
 
-export const functionDel = async (ID) => {
+export const functionDel = async (ID:number):Promise<string> => {
     const userRep = AppDataSource.getRepository(User)
 
     try {

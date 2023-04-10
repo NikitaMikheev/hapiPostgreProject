@@ -1,7 +1,7 @@
 import { AppDataSource } from "../../data-source"
 import { User } from "../entity/User"
 
-export const functionGet = async (ID) => { // Ищет по ID. Можно переделать под поиск любого поля
+export const functionGet = async (ID:number):Promise<string> => { // Ищет по ID. Можно переделать под поиск любого поля
     const userRep = AppDataSource.getRepository(User)
     const userGet = await userRep.findOneBy({
         id: ID

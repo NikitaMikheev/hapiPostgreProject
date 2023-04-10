@@ -1,8 +1,9 @@
 import { AppDataSource } from "../../data-source";
+import { myUser } from "../../types/type";
 import { User } from "../entity/User"
 import * as Crypto from 'crypto';
 
-export const functionPut = async (ID, payload) => {
+export const functionPut = async (ID:number, payload:myUser):Promise<string> => {
     const userRep = AppDataSource.getRepository(User)
     try {
         const userPut= await userRep.findOneBy({

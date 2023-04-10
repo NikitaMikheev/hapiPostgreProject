@@ -4,10 +4,10 @@ import { functionPut } from "../../model/service/userServicePut";
 import { functionDel } from "../../model/service/userServiceDelete";
 import { myUser } from "../../types/type";
 
-export const handlerGet = async (request, h) => {
+export const handlerGet = async (request, h):Promise<string> => {
     try {
         try {
-            const user = JSON.parse(await functionGet(request.query.id));
+            const user:myUser = JSON.parse(await functionGet(request.query.id));
             console.log(`Пользователь получен: ${user.firstName} ${user.lastName}`);
         
             return `Имя: ${user.firstName} <br> Фамилия: ${user.lastName} <br> E-mail: ${user.userEmail} <br> Возраст: ${user.age}`;
@@ -24,7 +24,7 @@ export const handlerGet = async (request, h) => {
     }
 }
 
-export const handlerPost = async (request, h) => { // добавление пользователя через форму 
+export const handlerPost = async (request, h):Promise<string> => { // добавление пользователя через форму 
     try {
 
         let formObj:myUser = {
@@ -36,13 +36,13 @@ export const handlerPost = async (request, h) => { // добавление по�
             age: parseInt(request.payload.userAge)
         }
     
-        const res = await functionPost(formObj);
+        const res:boolean = await functionPost(formObj);
 
         if(res===false) {
             return 'Пароли не совпадают!';
         }
 
-        return h.file('form.html');
+        return 'Пользователь добавлен!';
     }
 
     catch(error) {
@@ -51,9 +51,9 @@ export const handlerPost = async (request, h) => { // добавление по�
     }
 }
 
-export const handlerPut = async (request, h) => {
+export const handlerPut = async (request, h):Promise<string> => {
     try {
-        const ID = request.params.id;
+        const ID:number = request.params.id;
 
         if(await functionPut(ID, request.payload)) {
             return 'Такого пользователя не существует!';
@@ -67,14 +67,14 @@ export const handlerPut = async (request, h) => {
     }
 }
 
-export const handlerDel = async (request, h) => { // удаляем пользователя по запросу (например, через Insomnia), в качестве параметров (через /) передаем id
+export const handlerDel = async (request, h):Promise<string> => { // удаляем пользователя по запросу (например, через Insomnia), в качестве параметров (через /) передаем id
     try {
-        const ID = request.params.id;
+        const ID:number = request.params.id;
         if(await functionDel(ID)) {
             return 'Такого пользователя не существует!';
         }
         console.log("Пользователь удален!");
-        return h.file('form.html');
+        return 'Пользователь удален!';
     }
 
     catch(error) {

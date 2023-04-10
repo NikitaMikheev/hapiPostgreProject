@@ -8,7 +8,7 @@ export interface myUser {
     lastName: string,
     userEmail: string,
     userPass: string,
-    userPassConfm: string,
+    userPassConfm?: string,
     age: number
 }
 

@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 import config from "../../config";
 import { Tokens } from "../../types/type";
 
-export const validate = async (eAdress, password): Promise<false | Tokens> => {
+export const validate = async (eAdress:string, password:string): Promise<false | Tokens> => {
     const users = AppDataSource.getRepository(User)
     const user = await users.findOneBy({
         email: eAdress
