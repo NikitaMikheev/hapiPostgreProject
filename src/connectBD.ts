@@ -1,5 +1,6 @@
 import { AppDataSource } from "./data-source"
 import { User } from "./model/entity/User";
+import { City } from "./model/entity/City";
 import 'reflect-metadata';
 
 

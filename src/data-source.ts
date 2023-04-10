@@ -3,7 +3,7 @@ import { DataSource } from "typeorm"
 import { User } from "./model/entity/User"
 import dotenv from "dotenv"
 import path from "path";
-import { Test } from "./model/entity/Test";
+import { City } from "./model/entity/City";
 
 dotenv.config({path: path.join(__dirname, '..', '.env')});
 
@@ -16,7 +16,7 @@ export const AppDataSource = new DataSource({
     database: String(process.env.POSTGRES_DB), // база данных - менять
     synchronize: false,
     logging: false,
-    entities: [User, Test],
+    entities: [User, City],
     migrations: [__dirname + '/migrations/*.ts'],
     subscribers: [],
 })
