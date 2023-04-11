@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { City } from "./City";
 
 @Entity()
 export class User {
@@ -26,5 +27,8 @@ export class User {
 
     @Column()
     age: number
+
+    @ManyToOne(() => City, (city) => city.users)
+    city_user: City;
 
 }
