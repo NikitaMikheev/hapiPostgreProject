@@ -1,4 +1,5 @@
 import { AppDataSource } from "../../data-source"
+import { City } from "../entity/City"
 import { User } from "../entity/User"
 
 export const functionDel = async (ID:number):Promise<string> => {
@@ -10,7 +11,7 @@ export const functionDel = async (ID:number):Promise<string> => {
         })
     
         await userRep.remove(userRemove);
-    
+        
         const users = await AppDataSource.manager.find(User)
         console.log("Пользователи в базе данных: ", users)
     }

@@ -72,7 +72,7 @@ const put:ServerRoute<ReqRefDefaults> = ({
                 userEmail: Joi.string().description('E-mail пользователя'),
                 userPass: Joi.string().description('Пароль пользователя'),
                 userAge: Joi.number().description('Возраст пользователя'),
-                userCity: Joi.number().description('Город пользователя')
+                city: Joi.string().description('Город пользователя')
             }),
         },
     },

@@ -1,8 +1,9 @@
 import { AppDataSource } from "../../../data-source"
 import { City } from "../../entity/City";
 import { myUser } from "../../../types/type";
+import { User } from "../../entity/User";
 
-export const cityServicePost = async (formObj:myUser, newUser):Promise<void> => {
+export const cityServicePost = async (formObj:myUser, newUser:User):Promise<void> => {
     const cities = AppDataSource.getRepository(City)
     const city = await cities.findOneBy({
         city: formObj.city

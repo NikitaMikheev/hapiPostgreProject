@@ -5,7 +5,7 @@ export class addTestTable1681220360528 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`ALTER TABLE "user" ADD "cityUserId" integer`);
-        await queryRunner.query(`ALTER TABLE "user" ADD CONSTRAINT "FK_f928755e8e8c1c188b799a49a5e" FOREIGN KEY ("cityUserId") REFERENCES "city"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "user" ADD CONSTRAINT "FK_f928755e8e8c1c188b799a49a5e" FOREIGN KEY ("cityUserId") REFERENCES "city"("id") ON DELETE CASCADE ON UPDATE CASCADE`);
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
