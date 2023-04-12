@@ -1,6 +1,6 @@
 import { ReqRefDefaults, ServerRoute } from "@hapi/hapi";
 import Joi from "joi";
-import { handlerGet } from "./controllers/userController";
+import { handlerGet, handlerGetALLByCity } from "./controllers/userController";
 import { handlerPost } from "./controllers/userController";
 import { handlerPut } from "./controllers/userController";
 import { handlerDel } from "./controllers/userController";
@@ -20,6 +20,23 @@ const get:ServerRoute<ReqRefDefaults> = ({ // Ищет по ID. Можно пе�
         },
     },
     handler: handlerGet
+});
+
+
+const getALLByCity:ServerRoute<ReqRefDefaults> = ({ // Ищет всех пользователей в конкретном городе
+    method: 'GET',
+    path: '/getByCity',
+    options: {
+        description: 'Get запрос',
+        notes: 'Поиск всех пользователей из конкретного города',
+        tags: ['api'],
+        validate: {
+            query: Joi.object({
+                city: Joi.string().description('Город пользователя')
+            })
+        },
+    },
+    handler: handlerGetALLByCity
 });
 
 
@@ -96,4 +113,4 @@ const del:ServerRoute<ReqRefDefaults> = ({
     handler: handlerDel
 })
 
-export const crudRoutes: ServerRoute<ReqRefDefaults>[] = [get,post,put,del];
+export const crudRoutes: ServerRoute<ReqRefDefaults>[] = [get,post,put,del,getALLByCity];

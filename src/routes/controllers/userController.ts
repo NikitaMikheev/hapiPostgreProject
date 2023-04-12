@@ -1,8 +1,9 @@
-import { functionGet } from "../../model/service/userServiceGet";
+import { functionGet, functionGetByCity } from "../../model/service/userServiceGet";
 import { functionPost } from "../../model/service/userServicePost";
 import { functionPut } from "../../model/service/userServicePut";
 import { functionDel } from "../../model/service/userServiceDelete";
 import { myUser } from "../../types/type";
+import { User } from "../../model/entity/User";
 
 export const handlerGet = async (request, h):Promise<string> => {
     try {
@@ -23,6 +24,27 @@ export const handlerGet = async (request, h):Promise<string> => {
         console.log(error);
     }
 }
+
+
+export const handlerGetALLByCity = async (request, h):Promise<false | User[]> => {
+    try {
+        try {
+          const users = await functionGetByCity(request.query.city);
+          return users;  
+        }
+        catch {
+            return false;
+        }
+
+    }
+
+    catch(error) {
+        console.log('Ошибка GET запроса');
+        console.log(error);
+        return false;
+    }
+}
+
 
 export const handlerPost = async (request, h):Promise<string> => { // добавление пользователя через форму 
     try {
