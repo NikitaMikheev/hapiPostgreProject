@@ -9,7 +9,8 @@ export interface myUser {
     userEmail: string,
     userPass: string,
     userPassConfm?: string,
-    age: number
+    age: number,
+    city: string
 }
 
 export interface Tokens {

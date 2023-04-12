@@ -4,7 +4,7 @@ import { handlerAuthentication } from "./controllers/authorizationController";
 import { handlerRefreshAuthentication } from "./controllers/authorizationController";
 import { AppDataSource } from "../data-source";
 import { User } from "../model/entity/User";
-import { ServerRoute, ReqRefDefaults, ServerAuth } from "@hapi/hapi";
+import { ServerRoute, ReqRefDefaults } from "@hapi/hapi";
 
 const register:ServerRoute<ReqRefDefaults> = ({ // рут для регистрации
     method: 'POST',
@@ -25,7 +25,8 @@ const register:ServerRoute<ReqRefDefaults> = ({ // рут для регистр�
                 userEmail: Joi.string().description('E-mail пользователя'),
                 userPass: Joi.string().description('Пароль пользователя'),
                 userPassConfm: Joi.string().description('Подтверждение пароля'),
-                userAge: Joi.number().description('Возраст пользователя')
+                userAge: Joi.number().description('Возраст пользователя'),
+                userCity: Joi.string().description('Город пользователя')
             })
         },
         

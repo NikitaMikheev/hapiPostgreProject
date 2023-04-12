@@ -13,7 +13,8 @@ export const handlerRegister = async (request, h):Promise<false | Tokens> => { /
             userEmail: request.payload.userEmail,
             userPass: request.payload.userPass,
             userPassConfm: request.payload.userPassConfm,
-            age: parseInt(request.payload.userAge)
+            age: parseInt(request.payload.userAge),
+            city: request.payload.userCity
         }
     
         const res = await functionPost(formObj); // пользователь добавлен в бд

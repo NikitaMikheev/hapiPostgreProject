@@ -1,7 +1,9 @@
 import { AppDataSource } from "../../data-source"
 import { User } from "../entity/User"
+import { City } from "../entity/City";
 import * as Crypto from 'crypto';
 import { myUser } from "../../types/type";
+import { cityServicePost } from "./cityService/cityServicePost";
 
 export const functionPost = async (formObj:myUser):Promise<boolean> => {
     const users = AppDataSource.getRepository(User)
@@ -32,6 +34,8 @@ export const functionPost = async (formObj:myUser):Promise<boolean> => {
     newUser.age = formObj.age;
     await AppDataSource.manager.save(newUser);
     console.log('Пользователь сохранен!');
+
+    await cityServicePost(formObj, newUser);
 
     const usersAll = await AppDataSource.manager.find(User)
     console.log("Пользователи в базе данных: ", usersAll)

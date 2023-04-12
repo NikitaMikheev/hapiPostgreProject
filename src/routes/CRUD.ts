@@ -41,7 +41,8 @@ const post:ServerRoute<ReqRefDefaults> = ({ // рут для регистрац�
                 userLastName: Joi.string().description('Фамилия пользователя'),
                 userEmail: Joi.string().description('E-mail пользователя'),
                 userPass: Joi.string().description('Пароль пользователя'),
-                userAge: Joi.number().description('Возраст пользователя')
+                userAge: Joi.number().description('Возраст пользователя'),
+                userCity: Joi.string().description('Город пользователя')
             })
         },
         
@@ -70,7 +71,8 @@ const put:ServerRoute<ReqRefDefaults> = ({
                 userLastName: Joi.string().description('Фамилия пользователя'),
                 userEmail: Joi.string().description('E-mail пользователя'),
                 userPass: Joi.string().description('Пароль пользователя'),
-                userAge: Joi.number().description('Возраст пользователя')
+                userAge: Joi.number().description('Возраст пользователя'),
+                userCity: Joi.number().description('Город пользователя')
             }),
         },
     },

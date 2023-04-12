@@ -33,7 +33,8 @@ export const handlerPost = async (request, h):Promise<string> => { // добав
             userEmail: request.payload.userEmail,
             userPass: request.payload.userPass,
             userPassConfm: request.payload.userPassConfm,
-            age: parseInt(request.payload.userAge)
+            age: parseInt(request.payload.userAge),
+            city: request.payload.userCity
         }
     
         const res:boolean = await functionPost(formObj);
