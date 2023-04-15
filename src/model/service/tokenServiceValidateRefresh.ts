@@ -2,10 +2,10 @@ import { AppDataSource } from '../../data-source';
 import { User } from '../entity/User';
 import jwt from 'jsonwebtoken';
 import config from '../../config';
-import { type Tokens, type refreshToken } from '../../types/type';
+import { type Tokens, type RefreshToken } from '../../types/type';
 
 export const validateRefresh = async (token: string): Promise<false | Tokens> => {
-  const decodedData: refreshToken = jwt.verify(token, config.refresh); // декодируем токен, подставляя в него ключ
+  const decodedData: RefreshToken = jwt.verify(token, config.refresh); // декодируем токен, подставляя в него ключ
 
   if (Boolean(decodedData) === undefined) {
     // если рефреш токен просрочен, тогда вернёт false. Потребуется заново авторизироваться

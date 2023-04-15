@@ -18,7 +18,7 @@ export interface Tokens {
     refreshToken: string,
 }
 
-export interface refreshToken {
+export interface RefreshToken {
     aud: string,
     iss: string,
     id: number,
