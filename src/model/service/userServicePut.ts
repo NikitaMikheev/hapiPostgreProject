@@ -37,7 +37,7 @@ export const functionPut = async (ID: number, payload: myUser): Promise<string |
 
     await userRep.save(userPut);
 
-    await cityServiceChange(ID, payload, userPut);
+    await cityServiceChange(ID, payload, userPut); // МЕНЯЕМ СВЯЗИ ЮЗЕРА С ГОРОДОМ
 
     console.log('Изменения сохранены!');
     console.log(userPut);

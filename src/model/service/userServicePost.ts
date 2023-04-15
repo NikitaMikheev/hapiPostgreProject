@@ -34,7 +34,7 @@ export const functionPost = async (formObj: myUser): Promise<boolean> => {
   await AppDataSource.manager.save(newUser);
   console.log('Пользователь сохранен!');
 
-  await cityServicePost(formObj, newUser);
+  await cityServicePost(formObj, newUser); // СВЯЗИ ЮЗЕРА С ГОРОДОМ
 
   const usersAll = await AppDataSource.manager.find(User);
   console.log('Пользователи в базе данных: ', usersAll);
