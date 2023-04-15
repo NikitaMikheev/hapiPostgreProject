@@ -1,13 +1,13 @@
 import { AppDataSource } from '../../data-source';
 import { User } from '../entity/User';
+import type { refreshToken } from '../../types/type';
 import config from '../../config';
 import jwt from 'jsonwebtoken';
 
 export const tokenDelete = async (token: string): Promise<boolean> => {
-  const decodedData = jwt.verify(token, config.refresh); // декодируем токен, подставляя в него ключ
+  const decodedData: refreshToken = jwt.verify(token, config.refresh); // декодируем токен, подставляя в него ключ
 
-  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-  if (decodedData) {
+  if (Boolean(decodedData) === undefined) {
     // если рефреш токен просрочен, тогда вернёт false.
     return false;
   }

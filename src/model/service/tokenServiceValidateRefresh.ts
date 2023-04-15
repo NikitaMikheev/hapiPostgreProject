@@ -2,14 +2,12 @@ import { AppDataSource } from '../../data-source';
 import { User } from '../entity/User';
 import jwt from 'jsonwebtoken';
 import config from '../../config';
-import { type Tokens } from '../../types/type';
+import { type Tokens, type refreshToken } from '../../types/type';
 
 export const validateRefresh = async (token: string): Promise<false | Tokens> => {
-  const decodedData = jwt.verify(token, config.refresh); // декодируем токен, подставляя в него ключ
-  console.log(decodedData);
+  const decodedData: refreshToken = jwt.verify(token, config.refresh); // декодируем токен, подставляя в него ключ
 
-  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-  if (decodedData) {
+  if (Boolean(decodedData) === undefined) {
     // если рефреш токен просрочен, тогда вернёт false. Потребуется заново авторизироваться
     return false;
   }
