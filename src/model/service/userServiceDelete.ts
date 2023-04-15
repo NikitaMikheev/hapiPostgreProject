@@ -1,22 +1,22 @@
-import { AppDataSource } from "../../data-source"
-import { City } from "../entity/City"
-import { User } from "../entity/User"
+import { AppDataSource } from '../../data-source';
+import { User } from '../entity/User';
 
-export const functionDel = async (ID:number):Promise<string> => {
-    const userRep = AppDataSource.getRepository(User)
+export const functionDel = async (ID: number): Promise<string | boolean> => {
+  const userRep = AppDataSource.getRepository(User);
 
-    try {
-        const userRemove = await userRep.findOneBy({
-            id: ID
-        })
-    
-        await userRep.remove(userRemove);
-        
-        const users = await AppDataSource.manager.find(User)
-        console.log("Пользователи в базе данных: ", users)
+  try {
+    const userRemove = await userRep.findOneBy({
+      id: ID
+    });
+    if (userRemove !== null) {
+      await userRep.remove(userRemove);
+      const users = await AppDataSource.manager.find(User);
+      console.log('Пользователи в базе данных: ', users);
+      return true;
     }
 
-    catch {
-        return 'Такого пользователя не существует!';
-    }
-}
+    return false;
+  } catch {
+    return 'Такого пользователя не существует!';
+  }
+};

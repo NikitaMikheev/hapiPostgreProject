@@ -1,33 +1,33 @@
-import { AppDataSource } from "../../../data-source"
-import { City } from "../../entity/City";
-import { myUser } from "../../../types/type";
-import { User } from "../../entity/User";
+import { AppDataSource } from '../../../data-source';
+import { City } from '../../entity/City';
+import { type myUser } from '../../../types/type';
+import { type User } from '../../entity/User';
 
-export const cityServicePost = async (formObj:myUser, newUser:User):Promise<void> => {
-    const cities = AppDataSource.getRepository(City)
-    const city = await cities.findOneBy({
-        city: formObj.city
-    })
+export const cityServicePost = async (formObj: myUser, newUser: User): Promise<void> => {
+  const cities = AppDataSource.getRepository(City);
+  const city = await cities.findOneBy({
+    city: formObj.city
+  });
 
-    if(city) { // такой город уже в базе данных, значит пушим юзера в уже созданный массив
-        const relationCities = await cities.find({ // находим связи
-            relations: {
-                users: true
-            }
-        })
+  if (city !== null) {
+    // такой город уже в базе данных, значит пушим юзера в уже созданный массив
+    const relationCities = await cities.find({
+      // находим связи
+      relations: {
+        users: true
+      }
+    });
 
-        const index = relationCities.map(e => e.city).indexOf(formObj.city); // находим индекс требуемого нами города
- 
-        relationCities[index].users.push(newUser); // пушим в массив по индексу
-        await AppDataSource.manager.save(relationCities); // НЕ ЗАБЫВАТЬ СОХРАНЯТЬ ИЗМЕНЕНИЯ В БД !!!!!!!!!! 
-    }
+    const index = relationCities.map((e) => e.city).indexOf(formObj.city); // находим индекс требуемого нами города
 
-    else {
-        const newCity = new City(); // новый экземпляр сущности Город
-        newCity.city = formObj.city; // вписываем имя
-        newCity.users = [newUser]; // в массив добавляем пользователя
-    
-        await AppDataSource.manager.save(newCity);
-        console.log('Город добавлен!');
-    }
-}
+    relationCities[index].users.push(newUser); // пушим в массив по индексу
+    await AppDataSource.manager.save(relationCities); // НЕ ЗАБЫВАТЬ СОХРАНЯТЬ ИЗМЕНЕНИЯ В БД !!!!!!!!!!
+  } else {
+    const newCity = new City(); // новый экземпляр сущности Город
+    newCity.city = formObj.city; // вписываем имя
+    newCity.users = [newUser]; // в массив добавляем пользователя
+
+    await AppDataSource.manager.save(newCity);
+    console.log('Город добавлен!');
+  }
+};

@@ -1,4 +1,4 @@
 export = {
-    secret: 'secretAccess',
-    refresh: 'secretRefresh'
-}
+  secret: 'secretAccess',
+  refresh: 'secretRefresh'
+};

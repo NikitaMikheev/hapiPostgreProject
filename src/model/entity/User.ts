@@ -10,7 +10,7 @@ export class User {
     @Column()
     salt: string
 
-    @Column()
+    @Column({ type: 'varchar', nullable: true })
     refreshToken: string | null
 
     @Column()

@@ -16,9 +16,15 @@
         "sourceType": "module",
         "project": "./tsconfig.json"
     },
+    "ignorePatterns": ["src/build/*.js", "build/**/*.js", "src/model/entity/*.ts", "src/types/type.ts"],
     "rules": {
         "semi": ["error", "always"],
         "@typescript-eslint/semi": ["error", "always"],
-        "padded-blocks": ["error", "always"]
+        "padded-blocks": "off",
+        "@hapi/scope-start": "off",
+        "quotes": "off",
+        "@typescript-eslint/quotes": "off",
+        "space-before-function-paren": "off",
+        "@typescript-eslint/space-before-function-paren": "off"
     }
 }
