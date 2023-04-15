@@ -3,7 +3,7 @@ import { City } from '../../entity/City';
 import { type myUser } from '../../../types/type';
 import { User } from '../../entity/User';
 
-export const cityServiceChange = async (
+export const cityServiceChange = async ( // Меняет связь юзера и города
   id: number,
   payload: myUser,
   newUser: User

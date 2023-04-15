@@ -3,7 +3,7 @@ import { City } from '../../entity/City';
 import { type myUser } from '../../../types/type';
 import { type User } from '../../entity/User';
 
-export const cityServicePost = async (formObj: myUser, newUser: User): Promise<void> => {
+export const cityServicePost = async (formObj: myUser, newUser: User): Promise<void> => { // Добавляет связь города и юзера
   const cities = AppDataSource.getRepository(City);
   const city = await cities.findOneBy({
     city: formObj.city
