@@ -23,6 +23,7 @@ export const validate = async (eAdress: string, password: string): Promise<false
         aud: 'urn:audience:test',
         iss: 'urn:issuer:test',
         id: user.id,
+        scope: user.role,
         sub: false,
         maxAgeSec: 600, // 10 минут жизни токена
         timeSkewSec: 15
@@ -35,6 +36,7 @@ export const validate = async (eAdress: string, password: string): Promise<false
         aud: 'urn:audience:test',
         iss: 'urn:issuer:test',
         id: user.id,
+        scope: user.role,
         sub: false,
         timeSkewSec: 15
       },

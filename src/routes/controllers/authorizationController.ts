@@ -61,6 +61,5 @@ export const handlerRefreshAuthentication = async (request, h): Promise<false | 
 
 export const handlerLogout = async (request, h): Promise<boolean> => {
   const res = await tokenDelete(request.payload.token);
-
   return res;
 };

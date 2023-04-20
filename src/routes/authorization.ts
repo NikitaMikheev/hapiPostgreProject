@@ -4,8 +4,6 @@ import {
   handlerAuthentication,
   handlerRefreshAuthentication
 } from './controllers/authorizationController';
-import { AppDataSource } from '../data-source';
-import { User } from '../model/entity/User';
 import { type ServerRoute, type ReqRefDefaults } from '@hapi/hapi';
 
 const register: ServerRoute<ReqRefDefaults> = {
@@ -82,39 +80,8 @@ const authenticationRefresh: ServerRoute<ReqRefDefaults> = {
   handler: handlerRefreshAuthentication // Вовзращает на клиент обновленные токены
 };
 
-const authorize = {
-  // Рут на авторизацию со стратегией 'jwt_token'. Принимает с клиента access токен. Если токен валидируется - авторизирован. (При типе ServerRoute<ReqRefDefaults> ругается на payload)
-  method: 'POST',
-  path: '/login',
-  options: {
-    description: 'Вход',
-    notes: 'Вход',
-    tags: ['api'],
-    auth: 'jwt_token'
-  },
-  handler: async (artifacts, request, h) => {
-    const users = AppDataSource.getRepository(User);
-
-    const user = await users.findOneBy({
-      id: artifacts.auth.artifacts.decoded.payload.id
-    });
-
-    if (user === null || user.refreshToken === null) {
-      // проверяем есть ли у пользователя рефреш токен (если нет, то он разлогинен)
-      return {
-        isValid: false
-      };
-    }
-
-    return {
-      isValid: true
-    };
-  }
-};
-
 export const authorization: Array<ServerRoute<ReqRefDefaults>> = [
   register,
   authentication,
-  authenticationRefresh,
-  authorize
+  authenticationRefresh
 ];

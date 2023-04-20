@@ -16,6 +16,10 @@ const get: ServerRoute<ReqRefDefaults> = {
     description: 'Get запрос',
     notes: 'Запрос пользователя по ID',
     tags: ['api'],
+    auth: {
+      strategy: 'jwt_token',
+      scope: 'user'
+    },
     validate: {
       query: Joi.object({
         id: Joi.number().description('ID пользователя')
@@ -33,6 +37,10 @@ const getALLByCity: ServerRoute<ReqRefDefaults> = {
     description: 'Get запрос',
     notes: 'Поиск всех пользователей из конкретного города',
     tags: ['api'],
+    auth: {
+      strategy: 'jwt_token',
+      scope: 'admin'
+    },
     validate: {
       query: Joi.object({
         city: Joi.string().description('Город пользователя')
@@ -50,6 +58,10 @@ const post: ServerRoute<ReqRefDefaults> = {
     description: 'Post запрос',
     notes: 'Добавляет пользователя',
     tags: ['api'],
+    auth: {
+      strategy: 'jwt_token',
+      scope: 'admin'
+    },
     plugins: {
       'hapi-swagger': {
         payloadType: 'form'
@@ -76,6 +88,10 @@ const put: ServerRoute<ReqRefDefaults> = {
     description: 'Put запрос',
     notes: 'Изменяет пользователя',
     tags: ['api'],
+    auth: {
+      strategy: 'jwt_token',
+      scope: 'admin'
+    },
     plugins: {
       'hapi-swagger': {
         payloadType: 'form'
@@ -105,6 +121,10 @@ const del: ServerRoute<ReqRefDefaults> = {
     description: 'Delete запрос',
     notes: 'Удаляет пользователя',
     tags: ['api'],
+    auth: {
+      strategy: 'jwt_token',
+      scope: 'admin'
+    },
     validate: {
       params: Joi.object({
         id: Joi.number().description('ID пользователя')

@@ -8,6 +8,8 @@ import homePage from './routes/homePage';
 import { authorization } from './routes/authorization';
 import { logout } from './routes/logout';
 import config from './config';
+import { AppDataSource } from './data-source';
+import { User } from './model/entity/User';
 
 // ЭТО ТОЧКА ВХОДА
 
@@ -46,10 +48,22 @@ const start = async (): Promise<void> => {
       maxAgeSec: 600, // 10 минут жизни
       timeSkewSec: 15
     },
-    validate: (artifacts, request, h) => {
+    validate: async (artifacts, request, h) => {
+      const users = AppDataSource.getRepository(User);
+
+      const user = await users.findOneBy({
+        id: artifacts.decoded.payload.id
+      });
+
+      if (user === null || user.refreshToken === null) {
+        // проверяем есть ли у пользователя рефреш токен (если нет, то он разлогинен)
+        return {
+          isValid: false
+        };
+      }
+
       return {
-        isValid: true,
-        credentials: { user: artifacts.decoded.payload.user }
+        isValid: true
       };
     }
   });

@@ -9,7 +9,19 @@ const swaggerOptions: Swagger.RegisterOptions = {
   // настройка сваггера
   info: {
     title: 'Тест'
-  }
+  },
+  jsonPath: '/documentation.json',
+  documentationPath: '/documentation',
+  securityDefinitions: {
+    Bearer: {
+      type: 'apiKey',
+      name: 'Authorization',
+      in: 'header',
+      bearerFormat: 'JWT'
+    }
+  },
+  security: [{ Bearer: [] }],
+  schemes: ['http', 'https']
 };
 
 export const plugins: Array<Hapi.ServerRegisterPluginObject<any>> = [

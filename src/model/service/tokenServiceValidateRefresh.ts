@@ -28,6 +28,7 @@ export const validateRefresh = async (token: string): Promise<false | Tokens> =>
         aud: 'urn:audience:test',
         iss: 'urn:issuer:test',
         id: user.id,
+        scope: user.role,
         sub: false,
         maxAgeSec: 600, // 10 минут жизни токена
         timeSkewSec: 15
@@ -40,6 +41,7 @@ export const validateRefresh = async (token: string): Promise<false | Tokens> =>
         aud: 'urn:audience:test',
         iss: 'urn:issuer:test',
         id: user.id,
+        scope: user.role,
         sub: false,
         timeSkewSec: 15
       },

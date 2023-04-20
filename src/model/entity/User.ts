@@ -1,6 +1,11 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
 import { City } from "./City";
 
+export enum Role {
+    USER = 'user',
+    ADMIN = 'admin'
+}
+
 @Entity()
 export class User {
 
@@ -30,5 +35,12 @@ export class User {
 
     @ManyToOne(() => City, (city) => city.users)
     city_user: City;
+
+    @Column({
+        type: 'enum',
+        enum: Role,
+        default: Role.USER
+    })
+    role: Role
 
 }
