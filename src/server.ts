@@ -3,13 +3,10 @@ import { type Server } from '@hapi/hapi';
 import { plugins } from './plugins/plugins';
 import { type PHost } from './types/type';
 import { connectBD } from './connectBD';
-import { crudRoutes } from './routes/CRUD';
-import homePage from './routes/homePage';
-import { authorization } from './routes/authorization';
-import { logout } from './routes/logout';
 import config from './config';
 import { AppDataSource } from './data-source';
 import { User } from './model/entity/User';
+import routes from './routes';
 
 // ЭТО ТОЧКА ВХОДА
 
@@ -68,7 +65,7 @@ const start = async (): Promise<void> => {
     }
   });
 
-  server.route([...crudRoutes, ...authorization, homePage, logout]); // передаем массив рутов. Работает
+  server.route(routes); // передаем массив рутов. Работает
 };
 
 process.on('unhandledRejection', (err) => {

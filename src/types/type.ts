@@ -27,3 +27,12 @@ export interface RefreshToken {
     iat: number,
     exp: number
 }
+
+export interface TUserTree {
+    firstName: string,
+    lastName: string,
+    parentID: number[],
+    childID: number[],
+    partnerID: number[]
+
+}
